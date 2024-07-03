@@ -1,0 +1,35 @@
+steps:
+  # Étape 1 : Construire l'image Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/terraform-424109/my-repo/modelimage:latest', '.']
+
+  # Étape 2 : Pousser l'image Docker vers Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/terraform-424109/my-repo/modelimage:latest']
+
+  # Étape 3 : Vérifier l'état du répertoire et initialiser Terraform
+  - name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: 
+      - '-c'
+      - |
+        echo "Listing files in current directory"
+        ls -la
+        echo "Initializing Terraform"
+        terraform init
+
+  # Étape 4 : Planifier les changements Terraform
+  - name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: ['-c', 'terraform plan -out=terraform.plan']
+
+  # Étape 5 : Appliquer les changements Terraform
+  - name: 'hashicorp/terraform:1.0.0'
+    entrypoint: 'sh'
+    args: ['-c', 'terraform apply -auto-approve terraform.plan']
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+  default_logs_bucket_behavior: REGIONAL_USER_OWNED_BUCKET
+
+timeout: "1200s"

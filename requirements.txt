@@ -1,0 +1,4 @@
+fastapi
+functions-framework
+tensorflow
+google-cloud-storage
