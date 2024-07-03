@@ -30,7 +30,8 @@ async def load_model_on_startup():
     # Load the model
     model = load_model(local_model_path)
     print("Model loaded successfully.")
-
+    print('TEST')
+    
 @app.get("/")
 async def root():
     if model:
