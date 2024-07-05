@@ -11,7 +11,7 @@ terraform {
 }
 
 resource "google_cloud_run_service" "example" {
-  name     = "example-serviceml"
+  name     = "predictionml"
   location = "us-central1"
 
   template {
@@ -26,4 +26,12 @@ resource "google_cloud_run_service" "example" {
     percent         = 100
     latest_revision = true
   }
+  
+}
+
+resource "google_cloud_run_service_iam_member" "noauth" {
+  service    = google_cloud_run_service.example.name
+  location   = google_cloud_run_service.example.location
+  member     = "allUsers"
+  role       = "roles/run.invoker"
 }

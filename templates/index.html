@@ -8,6 +8,17 @@
 </head>
 <body>
     <div id="status"></div>
+    
+    <!-- Formulaire pour load l'image -->
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="fileInput" name="file" accept="image/*">
+        <button type="submit">Upload</button>
+    </form>
+    
+    <!-- image téléchargée -->
+    <div id="imageContainer">
+        <img id="uploadedImage" src="" alt="Uploaded Image" style="display:none; max-width:100%; height:auto;">
+    </div>
 
     <script>
         // Vérifier le statut du modèle
@@ -20,6 +31,23 @@
                 document.getElementById('status').innerText = 'Error loading status';
                 console.error('Error:', error);
             });
+
+        // Gérer la soumission du formulaire et l'affichage de l'image
+        document.getElementById('uploadForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 </body>
 </html>
