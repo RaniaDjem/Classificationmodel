@@ -11,7 +11,7 @@ terraform {
 }
 
 resource "google_cloud_run_service" "example" {
-  name     = "predictionml"
+  name     = "example-prediction"
   location = "us-central1"
 
   template {
@@ -26,7 +26,6 @@ resource "google_cloud_run_service" "example" {
     percent         = 100
     latest_revision = true
   }
-  
 }
 
 resource "google_cloud_run_service_iam_member" "noauth" {
