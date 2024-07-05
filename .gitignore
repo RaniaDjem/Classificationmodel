@@ -1,6 +1,7 @@
 # Ignorer 
 .ML
 atej
+.dockerignore
 
 # Ignorer les fichiers et répertoires de cache courants
 __pycache__/

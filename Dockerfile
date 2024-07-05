@@ -1,5 +1,5 @@
 # Utiliser une image officielle comme un parent
-FROM python:3.9-slim
+FROM python:3.9-alpine
 
 
 # Définir le répertoire de travail
