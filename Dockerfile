@@ -1,19 +1,18 @@
-# Utiliser une image officielle comme un parent
-FROM python:3.9-slim
+FROM python:3.10-slim
 
 
-# Définir le répertoire de travail
+# répertoire de travail
 WORKDIR /app
 
-# Copier les fichiers requirements.txt et installer les dépendances
+# Copie des fichiers requirements.txt et installer les dépendances
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copier le reste de l'application
+# Copie du reste de l'application
 COPY . /app
 
-# Exposer le port sur lequel l'application sera accessible
+# Exposition du port sur lequel l'application sera accessible
 EXPOSE 8080
 
-# Définir la commande pour lancer l'application
+# lancer l'application
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
