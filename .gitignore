@@ -1,7 +1,6 @@
 # Ignorer 
 .ML
 atej
-.dockerignore
 CODE2
 
 # Ignorer les fichiers et répertoires de cache courants
