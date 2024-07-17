@@ -11,7 +11,7 @@ terraform {
 }
 
 resource "google_cloud_run_service" "example" {
-  name     = "example-prediction"
+  name     = "marediction"
   location = "us-central1"
 
   template {
