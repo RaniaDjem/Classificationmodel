@@ -1,0 +1,19 @@
+Autorisation des appels non authentifier apres avoir deployer sur cloud run : 
+# Déployer le service
+gcloud run deploy example-prediction \
+--image=us-central1-docker.pkg.dev/terraform-424109/my-repo/modelimage:latest \
+--no-cpu-boost \
+--region=us-central1 \
+--project=terraform-424109
+
+# Autoriser les appels non authentifiés
+gcloud run services add-iam-policy-binding example-prediction \
+--member="allUsers" \
+--role="roles/run.invoker" \
+--region=us-central1 \
+--project=terraform-424109
+
+# Mettre à jour le trafic
+gcloud run services update-traffic example-prediction --to-latest \
+--region=us-central1 \
+--project=terraform-424109

@@ -28,9 +28,9 @@ resource "google_cloud_run_service" "example" {
   }
 }
 
-resource "google_cloud_run_service_iam_member" "noauth" {
-  service    = google_cloud_run_service.example.name
-  location   = google_cloud_run_service.example.location
-  member     = "allUsers"
-  role       = "roles/run.invoker"
-}
+#resource "google_cloud_run_service_iam_member" "noauth" {
+ # service    = google_cloud_run_service.example.name
+  #location   = google_cloud_run_service.example.location
+  #member     = "allUsers"
+  #role       = "roles/run.invoker"
+#}
