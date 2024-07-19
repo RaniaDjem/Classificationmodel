@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Model de predictioN</title>
+    <title>Prédiction de Classes CIFAR-10</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div id="status"></div>
+
+    <!-- Titre Principal et Description du Modèle -->
+    <header>
+        <h1>Prédiction de Classes CIFAR-10</h1>
+        <p>Ce modèle de réseau neuronal convolutif est capable de classer les images en 10 catégories différentes : avion, automobile, oiseau, chat, cerf, chien, grenouille, cheval, navire et camion. Utilisez l'interface ci-dessous pour charger une image et obtenir une prédiction de sa classe.</p>
+    </header>
     
+    <!-- Description détaillée de la construction du modèle -->
+    <section>
+        <h2>Construction du Modèle</h2>
+        <p>Le modèle est construit avec une architecture séquentielle utilisant la régularisation L2 pour prévenir le surajustement. Il intègre des couches de convolution avec normalisation par lots, des couches de pooling maximales, et des couches de dropout avec des taux croissants pour réduire la complexité et augmenter la robustesse.</p>
+    </section>
+
     <!-- Formulaire pour télécharger l'image -->
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" id="fileInput" name="file" accept="image/*">
-        <button type="submit">Upload and Predict</button>
-        <h1>myaaw</h1>
+        <button type="submit">Charger et Prédire</button>
     </form>
     
-    <!-- Afficher l'image téléchargée -->
+    <!-- Afficher l'image téléchargée et la prédiction -->
     <div id="imageContainer">
-        <img id="uploadedImage" src="" alt="Uploaded Image" style="display:none; max-width:100%; height:auto;">
+        <img id="uploadedImage" src="" alt="Uploaded Image" style="display:none; max-width:500px; height:auto;">
     </div>
-    
-    <!-- Afficher la prédiction -->
     <div id="prediction"></div>
+
+    <!-- Information sur le déploiement -->
+    <footer>
+        <p>Ce modèle a été déployé en utilisant les services de Google Cloud Platform (Cloud Build et Cloud Run) et configuré via Terraform pour une intégration et une maintenance efficaces.</p>
+    </footer>
 
     <script>
         // Vérifier le statut du modèle
@@ -32,8 +46,8 @@
                 document.getElementById('status').innerText = data.message;
             })
             .catch(error => {
-                document.getElementById('status').innerText = 'Error loading status';
-                console.error('Error:', error);
+                document.getElementById('status').innerText = 'Erreur lors du chargement du statut';
+                console.error('Erreur:', error);
             });
 
         // Gérer la soumission du formulaire et l'affichage de l'image et de la prédiction
@@ -58,7 +72,7 @@
                     });
 
                     const result = await response.json();
-                    document.getElementById('prediction').innerText = 'Predicted class: ' + result.predicted_class;
+                    document.getElementById('prediction').innerText = 'Classe Prédite: ' + result.predicted_class;
                 };
                 reader.readAsDataURL(file);
             }
