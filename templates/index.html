@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prédiction de Classes CIFAR-10</title>
+    <title>Prediction de Classes CIFAR-10</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div id="status"></div>
 
-    <!-- Titre Principal et Description du Modèle -->
+    <!-- Titre Principal et Description du Modele -->
     <header>
-        <h1>Prédiction de Classes CIFAR-10</h1>
-        <p>Ce modèle de réseau neuronal convolutif est capable de classer les images en 10 catégories différentes : avion, automobile, oiseau, chat, cerf, chien, grenouille, cheval, navire et camion. Utilisez l'interface ci-dessous pour charger une image et obtenir une prédiction de sa classe.</p>
+        <h1>Prediction avec des CNN.</h1>
+        <p>Ce modele de reseau de neurones convolutif (CNN) est capable de classer les images en 10 categories differentes : avion, automobile, oiseau, chat, cerf, chien, grenouille, cheval, navire et camion. Utilisez l'interface ci-dessous pour charger une image et obtenir une prediction de sa classe.</p>
     </header>
     
-    <!-- Description détaillée de la construction du modèle -->
+    <!-- Description detaillee de la construction du modele -->
     <section>
-        <h2>Construction du Modèle</h2>
-        <p>Le modèle est construit avec une architecture séquentielle utilisant la régularisation L2 pour prévenir le surajustement. Il intègre des couches de convolution avec normalisation par lots, des couches de pooling maximales, et des couches de dropout avec des taux croissants pour réduire la complexité et augmenter la robustesse.</p>
+        <h2>Construction du Modele</h2>
+        <p>Le modele est construit avec une architecture sequentielle utilisant la regularisation L2 pour prevenir le surajustement. Il integre des couches de convolution avec normalisation par lots, des couches de pooling maximales, et des couches de dropout avec des taux croissants pour reduire la complexite et augmenter la robustesse.</p>
     </section>
 
-    <!-- Formulaire pour télécharger l'image -->
+    <!-- Formulaire pour telecharger l'image -->
     <form id="uploadForm" enctype="multipart/form-data">
         <input type="file" id="fileInput" name="file" accept="image/*">
-        <button type="submit">Charger et Prédire</button>
+        <button type="submit">Charger et Predire</button>
     </form>
     
-    <!-- Afficher l'image téléchargée et la prédiction -->
+    <!-- Afficher l'image telechargee et la prediction -->
     <div id="imageContainer">
         <img id="uploadedImage" src="" alt="Uploaded Image" style="display:none; max-width:500px; height:auto;">
     </div>
     <div id="prediction"></div>
 
-    <!-- Information sur le déploiement -->
+    <!-- Information sur le deploiement -->
     <footer>
-        <p>Ce modèle a été déployé en utilisant les services de Google Cloud Platform (Cloud Build et Cloud Run) et configuré via Terraform pour une intégration et une maintenance efficaces.</p>
+        <p>Ce modele a ete deploye en utilisant les services de Google Cloud Platform (Cloud Build et Cloud Run) et configure via Terraform pour une integration et une maintenance efficaces.</p>
     </footer>
 
     <script>
-        // Vérifier le statut du modèle
+        // Verifier le statut du modele
         fetch('/status')
             .then(response => response.json())
             .then(data => {
@@ -50,7 +50,7 @@
                 console.error('Erreur:', error);
             });
 
-        // Gérer la soumission du formulaire et l'affichage de l'image et de la prédiction
+        // Gerer la soumission du formulaire et l'affichage de l'image et de la prediction
         document.getElementById('uploadForm').addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -72,7 +72,7 @@
                     });
 
                     const result = await response.json();
-                    document.getElementById('prediction').innerText = 'Classe Prédite: ' + result.predicted_class;
+                    document.getElementById('prediction').innerText = 'Classe Predite: ' + result.predicted_class;
                 };
                 reader.readAsDataURL(file);
             }

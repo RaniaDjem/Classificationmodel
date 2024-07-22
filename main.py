@@ -50,7 +50,8 @@ async def read_index():
 @app.get("/status")
 async def get_status():
     if model:
-        return {"message": "Bonne nouvelle le modèle a bien été chargé."}
+        #return {"message": "Bonne nouvelle le modèle a bien été chargé."}
+        return {"message": "Bienvenu !"}
     else:
         return {"message": "Le modèle n'est pas chargé."}
 
